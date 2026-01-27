@@ -40,7 +40,7 @@ public class PaymentController {
         return findAll.findAllPayments(pagination);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @Operation(summary = "Find payment by id")
     @ApiResponse(responseCode = "200", description = "Ok")
     public ResponseEntity<PaymentDto> listById(@PathVariable @NotNull Long id) {
