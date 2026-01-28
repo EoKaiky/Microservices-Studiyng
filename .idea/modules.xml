@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Microservices-Studiyng.iml" filepath="$PROJECT_DIR$/.idea/Microservices-Studiyng.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pagamentos/pagamentos.iml" filepath="$PROJECT_DIR$/pagamentos/pagamentos.iml" />
     </modules>
   </component>
 </project>
