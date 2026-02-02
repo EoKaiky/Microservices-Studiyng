@@ -32,6 +32,8 @@ public class PaymentController {
     private FindPaymentById findById;
     @Autowired
     private UpdatePayment updatePayment;
+    @Autowired
+    private ConfirmPayment confirmPayment;
 
     @GetMapping
     @Operation(summary = "List all payments with pagination")
@@ -74,5 +76,12 @@ public class PaymentController {
         deleteById.deletedPaymantById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/confirmar")
+    @Operation(summary = "Update status order")
+    public void ConfirmPayment(@PathVariable @NotNull Long id) {
+        confirmPayment.confirmPayment(id);
+    }
+
 
 }
