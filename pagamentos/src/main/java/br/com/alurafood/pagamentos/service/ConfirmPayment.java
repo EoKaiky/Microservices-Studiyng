@@ -31,4 +31,15 @@ public class ConfirmPayment {
         repository.save(payment.get());
         order.updatePayment(payment.get().getOrderId());
     }
+
+    public void updateStatus(Long id) {
+        Optional<Payment> payment = repository.findById(id);
+
+        if(!payment.isPresent()) {
+            throw new EntityNotFoundException();
+        }
+
+        payment.get().setStatus(Status.CONFIRMED_NO_INTEGRATION);
+        repository.save(payment.get());
+    }
 }

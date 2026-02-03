@@ -2,6 +2,7 @@ package br.com.alurafood.pagamentos.controller;
 
 import br.com.alurafood.pagamentos.dto.PaymentDto;
 import br.com.alurafood.pagamentos.service.*;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -77,10 +78,15 @@ public class PaymentController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{id}/confirmar")
+    @PatchMapping("/{id}/confirm")
     @Operation(summary = "Update status order")
+    @CircuitBreaker(name = "updateOrder", fallbackMethod = "paymentWithPendingIntegration")
     public void ConfirmPayment(@PathVariable @NotNull Long id) {
         confirmPayment.confirmPayment(id);
+    }
+
+    public void paymentWithPendingIntegration(Long id, Exception e) {
+        confirmPayment.updateStatus(id);
     }
 
 
